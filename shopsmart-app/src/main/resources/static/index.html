@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSmart | Online Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header h1 span {
+            color: #93c5fd;
+        }
+
+        .cart-link {
+            color: white;
+            text-decoration: none;
+            background: #1d4ed8;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .cart-link:hover {
+            background: #2563eb;
+        }
+
+        .hero {
+            padding: 45px 7%;
+            background: #dbeafe;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin: 0 0 12px;
+        }
+
+        .hero p {
+            color: #475569;
+            margin-bottom: 22px;
+        }
+
+        .search {
+            width: 100%;
+            max-width: 450px;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            outline-color: #2563eb;
+        }
+
+        main {
+            padding: 30px 7%;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #message {
+            color: #64748b;
+            margin: 12px 0 20px;
+        }
+
+        #products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 14px #0000000d;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .product h3 {
+            margin: 0 0 10px;
+            font-size: 19px;
+        }
+
+        .description {
+            color: #64748b;
+            line-height: 1.5;
+            min-height: 42px;
+        }
+
+        .price {
+            color: #1d4ed8;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .category,
+        .stock {
+            font-size: 14px;
+            color: #64748b;
+            margin: 5px 0;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            border-radius: 7px;
+            padding: 11px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .add-to-cart {
+            margin-top: auto;
+            padding-top: 12px;
+            width: 100%;
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .add-to-cart:hover {
+            background: #1e40af;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            background: #94a3b8;
+        }
+
+        .cart-section {
+            margin: 10px 7% 40px;
+            padding: 28px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 3px 14px #0000000d;
+        }
+
+        .cart-section h2 {
+            margin-top: 0;
+        }
+
+        #cartItems {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 16px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .cart-item-details strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .cart-item-details span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .cart-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .quantity-button {
+            background: #e2e8f0;
+            color: #172033;
+            min-width: 35px;
+        }
+
+        .quantity-button:hover {
+            background: #cbd5e1;
+        }
+
+        .remove-button {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .remove-button:hover {
+            background: #fecaca;
+        }
+
+        .cart-summary {
+            margin-top: 22px;
+            text-align: right;
+        }
+
+        .cart-summary h3 {
+            font-size: 23px;
+        }
+
+        .empty-cart {
+            color: #64748b;
+            padding: 15px 0;
+        }
+
+        .clear-button {
+            background: #e2e8f0;
+            color: #172033;
+        }
+
+        .clear-button:hover {
+            background: #cbd5e1;
+        }
+
+        footer {
+            background: #172554;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h2 {
+                font-size: 25px;
+            }
+
+            .cart-section {
+                margin-left: 4%;
+                margin-right: 4%;
+                padding: 18px;
+            }
+
+            main {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+            .cart-summary {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Shop<span>Smart</span></h1>
+
+    <a href="#cart" class="cart-link">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </a>
+</header>
+
+<section class="hero">
+    <h2>Find Your Next Favourite Product</h2>
+    <p>Explore quality products at ShopSmart.</p>
+
+    <input
+            id="searchInput"
+            class="search"
+            type="search"
+            placeholder="Search by product name or category..."
+            aria-label="Search products">
+</section>
+
+<main>
+    <div class="section-heading">
+        <h2>Our Products</h2>
+    </div>
+
+    <p id="message" role="status">Loading products...</p>
+
+    <section id="products" aria-label="Product list"></section>
+</main>
+
+<section id="cart" class="cart-section">
+    <h2>🛒 Your Shopping Cart</h2>
+
+    <div id="cartItems">
+        <p class="empty-cart">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-summary">
+        <h3>Total: <span id="cartTotal">₹0.00</span></h3>
+
+        <button
+                id="clearCartButton"
+                class="clear-button"
+                type="button">
+            Clear Cart
+        </button>
+    </div>
+</section>
+
+<footer>
+    <p>ShopSmart — E-Commerce Application</p>
+    <p>Built with Java, Spring Boot, MySQL and REST API automation.</p>
+</footer>
+
+<script>
+    const productsContainer = document.getElementById("products");
+    const message = document.getElementById("message");
+    const searchInput = document.getElementById("searchInput");
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartCountElement = document.getElementById("cartCount");
+    const cartTotalElement = document.getElementById("cartTotal");
+    const clearCartButton = document.getElementById("clearCartButton");
+
+    let allProducts = [];
+    let cart = [];
+
+    // Load products from the Spring Boot REST API.
+    async function loadProducts() {
+        message.textContent = "Loading products...";
+
+        try {
+            const response = await fetch("/api/products");
+
+            if (!response.ok) {
+                throw new Error("Failed to retrieve products.");
+            }
+
+            const data = await response.json();
+
+            if (!Array.isArray(data)) {
+                throw new Error("Unexpected product data received.");
+            }
+
+            allProducts = data;
+            displayProducts(allProducts);
+        } catch (error) {
+            console.error("Product loading error:", error);
+
+            message.textContent =
+                "Unable to load products. Check that the backend is running.";
+        }
+    }
+
+    // Display product cards.
+    function displayProducts(products) {
+        productsContainer.replaceChildren();
+
+        message.textContent = products.length
+            ? `${products.length} product(s) found`
+            : "No products found.";
+
+        products.forEach(product => {
+            const card = document.createElement("article");
+            card.className = "product";
+
+            const name = document.createElement("h3");
+            name.textContent = product.name;
+
+            const description = document.createElement("p");
+            description.className = "description";
+            description.textContent = product.description || "No description available.";
+
+            const price = document.createElement("p");
+            price.className = "price";
+            price.textContent = formatCurrency(product.price);
+
+            const category = document.createElement("p");
+            category.className = "category";
+            category.textContent = `Category: ${product.category || "General"}`;
+
+            const stock = document.createElement("p");
+            stock.className = "stock";
+            stock.textContent = `Stock available: ${product.stockQuantity}`;
+
+            const addButton = document.createElement("button");
+            addButton.type = "button";
+            addButton.className = "add-to-cart";
+            addButton.dataset.productId = product.id;
+
+            if (Number(product.stockQuantity) <= 0) {
+                addButton.textContent = "Out of Stock";
+                addButton.disabled = true;
+            } else {
+                addButton.textContent = "Add to Cart";
+
+                addButton.addEventListener("click", () => {
+                    addToCart(product);
+                });
+            }
+
+            card.append(
+                name,
+                description,
+                price,
+                category,
+                stock,
+                addButton
+            );
+
+            productsContainer.appendChild(card);
+        });
+    }
+
+    // Format prices consistently.
+    function formatCurrency(amount) {
+        return "₹" + Number(amount).toFixed(2);
+    }
+
+    // Add a product to the cart.
+    function addToCart(product) {
+        const stockQuantity = Number(product.stockQuantity);
+
+        if (stockQuantity <= 0) {
+            alert("This product is out of stock.");
+            return;
+        }
+
+        const existingItem = cart.find(
+            item => item.id === product.id
+        );
+
+        if (existingItem) {
+            if (existingItem.quantity >= existingItem.stockQuantity) {
+                alert("You cannot add more than the available stock.");
+                return;
+            }
+
+            existingItem.quantity++;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: Number(product.price),
+                quantity: 1,
+                stockQuantity: stockQuantity
+            });
+        }
+
+        renderCart();
+    }
+
+    // Increase or decrease the quantity of a cart item.
+    function changeQuantity(productId, change) {
+        const item = cart.find(
+            cartItem => cartItem.id === productId
+        );
+
+        if (!item) {
+            return;
+        }
+
+        const newQuantity = item.quantity + change;
+
+        if (newQuantity <= 0) {
+            removeFromCart(productId);
+            return;
+        }
+
+        if (newQuantity > item.stockQuantity) {
+            alert("You cannot exceed the available stock.");
+            return;
+        }
+
+        item.quantity = newQuantity;
+        renderCart();
+    }
+
+    // Remove an item completely.
+    function removeFromCart(productId) {
+        cart = cart.filter(
+            item => item.id !== productId
+        );
+
+        renderCart();
+    }
+
+    // Empty the entire cart.
+    function clearCart() {
+        cart = [];
+        renderCart();
+    }
+
+    // Render the cart and recalculate its totals.
+    function renderCart() {
+        cartItemsContainer.replaceChildren();
+
+        let totalItems = 0;
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            const emptyMessage = document.createElement("p");
+            emptyMessage.className = "empty-cart";
+            emptyMessage.textContent = "Your cart is empty.";
+
+            cartItemsContainer.appendChild(emptyMessage);
+        }
+
+        cart.forEach(item => {
+            totalItems += item.quantity;
+            totalPrice += item.price * item.quantity;
+
+            const row = document.createElement("div");
+            row.className = "cart-item";
+
+            const details = document.createElement("div");
+            details.className = "cart-item-details";
+
+            const name = document.createElement("strong");
+            name.textContent = item.name;
+
+            const price = document.createElement("span");
+            price.textContent =
+                `${formatCurrency(item.price)} each`;
+
+            details.append(name, price);
+
+            const actions = document.createElement("div");
+            actions.className = "cart-actions";
+
+            const decreaseButton = document.createElement("button");
+            decreaseButton.type = "button";
+            decreaseButton.className = "quantity-button";
+            decreaseButton.textContent = "−";
+            decreaseButton.setAttribute(
+                "aria-label",
+                `Decrease ${item.name} quantity`
+            );
+
+            decreaseButton.addEventListener("click", () => {
+                changeQuantity(item.id, -1);
+            });
+
+            const quantity = document.createElement("span");
+            quantity.textContent = item.quantity;
+            quantity.setAttribute("aria-label", "Quantity");
+
+            const increaseButton = document.createElement("button");
+            increaseButton.type = "button";
+            increaseButton.className = "quantity-button";
+            increaseButton.textContent = "+";
+            increaseButton.setAttribute(
+                "aria-label",
+                `Increase ${item.name} quantity`
+            );
+
+            increaseButton.disabled =
+                item.quantity >= item.stockQuantity;
+
+            increaseButton.addEventListener("click", () => {
+                changeQuantity(item.id, 1);
+            });
+
+            const removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.className = "remove-button";
+            removeButton.textContent = "Remove";
+
+            removeButton.addEventListener("click", () => {
+                removeFromCart(item.id);
+            });
+
+            actions.append(
+                decreaseButton,
+                quantity,
+                increaseButton,
+                removeButton
+            );
+
+            const subtotal = document.createElement("p");
+            subtotal.textContent =
+                `Subtotal: ${formatCurrency(item.price * item.quantity)}`;
+
+            subtotal.style.fontWeight = "bold";
+
+            const itemContent = document.createElement("div");
+            itemContent.style.width = "100%";
+            itemContent.append(row);
+            row.append(details, actions);
+
+            cartItemsContainer.appendChild(itemContent);
+        });
+
+        cartCountElement.textContent = totalItems;
+        cartTotalElement.textContent = formatCurrency(totalPrice);
+    }
+
+    // Search products by name or category.
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+
+        const filteredProducts = allProducts.filter(product => {
+            const name = (product.name || "").toLowerCase();
+            const category = (product.category || "").toLowerCase();
+
+            return name.includes(query) || category.includes(query);
+        });
+
+        displayProducts(filteredProducts);
+    });
+
+    clearCartButton.addEventListener("click", clearCart);
+
+    // Start the application.
+    renderCart();
+    loadProducts();
+</script>
+
+</body>
+</html>
